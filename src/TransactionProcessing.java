@@ -1,8 +1,6 @@
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Logger;
 
 public class TransactionProcessing {
@@ -21,7 +19,6 @@ public class TransactionProcessing {
     private static void init(){
         //each of these functions will add transactions to the arraylist
         // based on their type
-
         addMoneyTransfers();
         addBillsPayments();
         addBuyLoads();
@@ -53,34 +50,46 @@ public class TransactionProcessing {
             }
         }
 
+        //////////////////////////////////////////////////////////////////////////
         logger.info("UNIQUE BILLS: ");
 
-        //these for loops are made for comparing bills whether it has a duplicate
-        //NOTE: i - indicates the first BillsPayment object to
-        // compare with j (the second BillsPayment object)
+        //Note by Densel: "The following block of code may require code review
+        //                 and I'm open for discussion about this."
+
+        //these for loops are made for comparing bills whether if a bill has a duplicate
+        //i - indicates the BillsPayment object to determine if it has a duplicate
+        //j - indicates the BillsPayment object for comparing with i
+
         for (int i = 0; i < billsPaymentArrayList.size(); i++){
             for (int j = 0; j < billsPaymentArrayList.size(); j++){
 
                 //if i has the same attribute values compared to j and
-                // i is not the same object being compared (i !=j)
+                // i is not comparing itself (i !=j)
                 if (billsPaymentArrayList.get(i).equals(billsPaymentArrayList.get(j))
                     && i != j){
 
                     //add the bill to the duplicatedBills arraylist
                    duplicatedBills.add(billsPaymentArrayList.get(i));
 
-                   //sets j to max and moves to the next BillsPayment object for comparing
+                   //sets j to max hence stops the comparison, increments i by 1,
+                    //then moves to the next object
                    j = billsPaymentArrayList.size();
+                }
 
-                   //else if i did not have any same BillsPayment object,
-                    //then it is unique
-                } else if (j == billsPaymentArrayList.size() -1){
+                //after comparing, j will increment by 1 and moves to the next object
+                //for comparing again
+
+                //else if i did not have any same BillsPayment object,
+                //then it is unique
+                else if (j == billsPaymentArrayList.size() -1){
 
                     //log the unique bill
                     logger.info(billsPaymentArrayList.get(i).toString());
                 }
+
             }
         }
+        //////////////////////////////////////////////////////////////////////////
 
         logger.info("DUPLICATED BILLS: ");
         //logs all the duplicated bills

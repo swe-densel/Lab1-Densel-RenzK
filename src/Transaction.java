@@ -1,19 +1,20 @@
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Transaction {
-    private int store_id;
-    private int transaction_id;
-    private LocalDateTime timestamp;
-    private int account_id;
-    private BigDecimal amount;
+    protected int store_id;
+    protected int transaction_id;
+    protected LocalDateTime timestamp;
+    protected int account_id;
+    //Use BigDecimal for monetary values 
+    protected BigDecimal amount;
 
-    public Transaction() {
-    }
-
-    public Transaction(int store_id, int transaction_id, LocalDateTime timestamp, int account_id, BigDecimal amount) {
+    //this constructor is used by child classes for instantiation through "super()"
+    public Transaction(int store_id,
+                       int transaction_id,
+                       LocalDateTime timestamp,
+                       int account_id,
+                       BigDecimal amount) {
         this.store_id = store_id;
         this.transaction_id = transaction_id;
         this.timestamp = timestamp;
@@ -59,22 +60,5 @@ public class Transaction {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-
-        if (obj == null || this.getClass() != obj.getClass())
-            return false;
-
-        Transaction that = (Transaction) obj;
-
-        return this.getAccount_id() == that.getAccount_id()
-                && this.getAmount().equals(that.getAmount())
-                && this.getTimestamp().equals(that.getTimestamp())
-                && this.getTransaction_id() == that.getTransaction_id()
-                && this.getStore_id() == that.getStore_id();
     }
 }

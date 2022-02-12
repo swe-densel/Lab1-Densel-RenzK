@@ -10,10 +10,10 @@ public class MoneyTransfer extends Transaction{
                          int account_id,
                          BigDecimal amount,
                          String recipient) {
+        //this super() refers to the constructor of Transaction
         super(store_id, transaction_id, timestamp, account_id, amount);
         this.recipient = recipient;
     }
-
 
     public String getRecipient() {
         return recipient;
@@ -23,6 +23,8 @@ public class MoneyTransfer extends Transaction{
         this.recipient = recipient;
     }
 
+    //override toString() function to return a String with all the details
+    //of an object of this class
     @Override
     public String toString() {
         return "Store ID: " + this.getStore_id() + "\n" +
@@ -33,6 +35,8 @@ public class MoneyTransfer extends Transaction{
                 "Recipient: " + this.getRecipient() + "\n";
     }
 
+    //override equals() function to compare objects if these have the same
+    //values on their attributes
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
