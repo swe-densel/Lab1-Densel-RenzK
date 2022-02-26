@@ -46,16 +46,25 @@ public class BillsPayment extends Transaction{
                 "Bills Charge: " + this.getBills_charge() + "\n";
     }
 
+    //overridden equals() to customize its function to return true
+    //if both objects have the same values of their attributes
+    //equals() by default only checks the object themselves and not
+    // the values of their attributes
     @Override
     public boolean equals(Object obj) {
+        //if comparing the same object
         if (this == obj)
             return true;
 
+        //checking if the object passed is null
+        //comparing objects if both of them are of the same class
         if (obj == null || this.getClass() != obj.getClass())
             return false;
 
         BillsPayment that = (BillsPayment) obj;
 
+        //checks if the object passed has the same value of its
+        //attributes with that of the other object
         return this.getAccount_id() == that.getAccount_id()
                 && this.getAmount().equals(that.getAmount())
                 && this.getTimestamp().equals(that.getTimestamp())
